@@ -36,24 +36,7 @@
 
   <?php
 
-//http://localhost:8888/sito/gelateria/certificazione.php
-
-// nome di host
-$host = "localhost"; //localhost
-
-// nome del database
-$db = "sitogelateria"; //gelateria
-
-  // username dell'utente in connessione
-    $user = "ice"; //ice
-
-// password dell'utente
-    $password = "cream"; //cream
-
-
-$connessione = new PDO("mysql:host=$host; dbname=$db", $user, $password);
-
-       //query  per ordinare la tabella
+  include("conn.php");
 
     If(
         (isset($_GET['order']) and $sql=('SELECT * FROM certificazione ORDER BY nome_certificazione'))
@@ -68,7 +51,7 @@ $connessione = new PDO("mysql:host=$host; dbname=$db", $user, $password);
             echo '<td>' . $row['id_certificazione'] . '</td><td>' . $row['nome_certificazione'] . '</td><td>' . $row['descrizione_certificazione'] . '</td><td> ' . $row['data_certificazione'] . '</td><td> ' . $row['logo_certificazione'] . '</td>';
 
             // LINK update_form.php
-            echo '<td><a href="certificazione_update.php?id=' . $row['id_certificazione'] . '&nome_certificazione=' . $row['nome_certificazione'] . '&data_certificazione=' . $row['data_certificazione'] . '&descrizione_certificazione=' . $row['descrizione_certificazione'] .'&logo_certificazione=' . $row['logo_certificazione'] . '">UPDATE</a> or ';
+            echo '<td><a href="certificazione_update.php?id_certificazione=' . $row['id_certificazione'] . '&nome_certificazione=' . $row['nome_certificazione'] . '&data_certificazione=' . $row['data_certificazione'] . '&descrizione_certificazione=' . $row['descrizione_certificazione'] .'&logo_certificazione=' . $row['logo_certificazione'] . '">UPDATE</a> or ';
 
             // LINK delete_form.php
             echo '<a href="certificazione_delete.php?id_certificazione=' . $row['id_certificazione'] . '"> DELETE</a></td></tr> ';

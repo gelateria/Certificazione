@@ -1,5 +1,5 @@
 <?php
-
+include("conn.php");
 
 // il get mi porta i valori  dei recor presenti nei link della pagina SELECT nei campi del form in questa pagina
 $id=$_GET['id_certificazione'];
@@ -11,34 +11,15 @@ $logo=$_GET['logo_certificazione'];
 //definizione condizione post
 if($_POST)
 {
-    // collegamento al db
-    // nome di host
-    $host = "localhost"; //localhost
-
-// nome del database
-    $db = "sitogelateria"; //gelateria
-
-// username dell'utente in connessione
-    $user = "ice"; //ice
-
-// password dell'utente
-    $password = "cream"; //cream
-
-
-    $connessione = new PDO("mysql:host=$host; dbname=$db", $user, $password);
-
-    //variabili prese dopo il submit tra virgolette ci sono gli ID delle variabili nel form
-
-
     $idn= (isset($_POST['idn'])) ? $_POST['idn'] : '';
     $certn = (isset($_POST['certn'])) ? $_POST['certn'] : '';
     $datan = (isset($_POST['datan'])) ? $_POST['datan'] : '';
-    $descrn(isset($_POST['descrn'])) ? $_POST['descrn'] : '';
-    $logon(isset($_POST['logon'])) ? $_POST['logon'] : '';
+    $descr =(isset($_POST['descr'])) ? $_POST['descr'] : '';
+    $logo =(isset($_POST['logon'])) ? $_POST['logon'] : '';
 
 // modifica del record nel db con update
     $sql= $connessione->exec("UPDATE certificazione
-    							SET nome_certificazione='$certn' , data_certificazione='$datan' , descrizione_certificazione='$descrn', logo_certificazione='$logon'
+    							SET nome_certificazione='$certn' , data_certificazione='$datan' , descrizione_certificazione='$descr', logo_certificazione='$logo'
                               	WHERE id_certificazione='$id'
                                ");
 
@@ -51,7 +32,7 @@ else
 {
 
 ?>
-<!DOCTYPE html>
+
 <html>
 <head>
     <title>Update Record PDO</title>
@@ -80,8 +61,8 @@ else
             <td><input type="text" name="<?php  echo $id ?>" value="<?php  echo $id ?>"> </td>
             <td><input type="text" name="certn" value="<?php  echo $cert ?>"> </td>
             <td><input type="text" name="datan" value="<?php  echo $data ?>"> </td>
-            <td><input type="text" name="descrn" value="<?php  echo $descr ?>"> </td>
-            <td><input type="text" name="logon" value="<?php  echo $logo ?>"><input name="foto" type="file" id="foto" > </td>
+            <td><input type="text" name="descr" value="<?php  echo $descr ?>"> </td>
+            <td><input type="text" name="logo" value="<?php  echo $logo ?>"><input name="foto" type="file" id="foto" > </td>
 
             <td>
                 <input type="submit" name"update" value="Update">

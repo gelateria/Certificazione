@@ -1,34 +1,19 @@
 <?php
-//http://localhost:8888/sito/gelateria/certificazione.php
-
-// nome di host
-$host = "localhost"; //localhost
-
-// nome del database
-$db = "sitogelateria";
-
-// username dell'utente in connessione
-    $user = "ice"; //ice
-
-// password dell'utente
-    $password = "cream"; //cream
-
-
-$connessione = new PDO("mysql:host=$host; dbname=$db", $user, $password);
+include("conn.php");
 
 
 if(isset($_POST['submit'])) {
 
 
     $cert = (isset($_POST['certificazione'])) ? $_POST['certificazione'] : '';
-    $data_cert = (isset($_POST['data'])) ? $_POST['data'] : '';
+    $data_cert = (isset($_POST['date'])) ? $_POST['date'] : '';
    // $query_data = "INSERT INTO certificazione VALUES('" . STR_TO_DATE($data_cert, '%d/%m/%Y' )."')";
 
     $descr = (isset($_POST['description'])) ? $_POST['description'] : '';
     $foto=(isset($_POST['foto'])) ? $_POST['foto'] : '';
 
     $sql = $connessione->prepare("
-                                  INSERT INTO `certificazione`( `nome_certificazione`, `data_certificazione`,`descrizione_certificazione`,`logo_certificazione`)
+                                  INSERT INTO certificazione (nome_certificazione,data_certificazione,descrizione_certificazione,logo_certificazione)
 
                         VALUES ('".$cert."','".$data_cert."','".$descr."','".$foto."')");
     if ($sql->execute()) {
@@ -76,7 +61,7 @@ if(isset($_POST['submit'])) {
         </p>
 
         <p>Data
-            <input type="date" name="date" required> (YYYY-MM-DD)
+            <input type="date" name="date" required>
 
         </p>
         <p>Descrizione
